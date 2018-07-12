@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mzd.multipledatasources.mapper.test01.TestMapping">
+	<resultMap id="BaseResultMap"
+		type="com.mzd.multipledatasources.bean.Multi.ScoreAndTest">
+		<result column="userid" jdbcType="VARCHAR" property="userid" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<collection property="testbeanlist"
+			ofType="com.mzd.multipledatasources.bean.Single1.TestBean">
+			<result column="id" jdbcType="VARCHAR" property="id" />
+			<result column="userid" jdbcType="VARCHAR" property="userid" />
+			<result column="score" jdbcType="INTEGER" property="score" />
+			<result column="classid" jdbcType="VARCHAR" property="classid" />
+		</collection>
+	</resultMap>
+	<select id="selectall" resultMap="BaseResultMap">
+		select u.username,u.userid,t.*
+		from cs_user u left join cs_test t on
+		t.userid=u.userid
+	</select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.mzd.multipledatasources.mapper.test02.ClassAndTeacherMapping">
+	<resultMap id="BaseResultMap"
+		type="com.mzd.multipledatasources.bean.Multi.ClassAndTeacher">
+		<result column="classid" jdbcType="VARCHAR" property="classid" />
+		<result column="classname" jdbcType="VARCHAR" property="classname" />
+		<result column="classno" jdbcType="VARCHAR" property="classno" />
+		<collection property="listteacher"
+			ofType="com.mzd.multipledatasources.bean.Single2.TeachersBean">
+			<result column="id" jdbcType="VARCHAR" property="id" />
+			<result column="teachername" jdbcType="VARCHAR" property="teachername" />
+			<result column="classid" jdbcType="VARCHAR" property="classid" />
+		</collection>
+	</resultMap>
+	<select id="selectallclass" resultMap="BaseResultMap">
+		SELECT * FROM cs_class c LEFT JOIN cs_teacher t
+		on t.classid=c.classid
+	</select>
+</mapper>
